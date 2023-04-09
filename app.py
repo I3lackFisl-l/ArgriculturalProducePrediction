@@ -95,11 +95,3 @@ f_pred_val = selectFruitModel(plant).predict(df_fruit)
 #display prediction value
 st.markdown("#### ผลผลิตการทำนายจากแบบจำลองรวมทุกประเภทผลผลิต  : "+  str(f'{aam_pred_val[0]:.2f}') )
 st.markdown("#### ผลผลิตการทำนายจากแบบจำลองเฉพาะประเภท" + plant + " : "+  str(f'{f_pred_val[0]:.2f}'))
-#make a prediction
-aam_pred_val = all_around_model.predict(df)
-df_fruit = df.drop(['plant'], axis=1)
-f_pred_val = selectFruitModel(plant).predict(df_fruit)
-# f_pred_val = durian_model.predict(df_fruit)
-#display prediction value
-st.markdown("#### ผลผลิตการทำนายจากแบบจำลองรวมทุกประเภทผลผลิต  : "+  str(f'{aam_pred_val[0]:.2f}') )
-st.markdown("#### ผลผลิตการทำนายจากแบบจำลองเฉพาะประเภท" + plant + " : "+  str(f'{f_pred_val[0]:.2f}'))
