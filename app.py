@@ -95,3 +95,5 @@ f_pred_val = selectFruitModel(plant).predict(df_fruit)
 #display prediction value
 st.markdown("#### ผลผลิตการทำนายจากแบบจำลองรวมทุกประเภทผลผลิต  : "+  str(f'{aam_pred_val[0]:.2f}') )
 st.markdown("#### ผลผลิตการทำนายจากแบบจำลองเฉพาะประเภท" + plant + " : "+  str(f'{f_pred_val[0]:.2f}'))
+
+#https://i3lackfisl-l-argriculturalproduceprediction-app-s11bs3.streamlit.app/
