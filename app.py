@@ -13,21 +13,22 @@ from dataPrep.datapreparation import DataPreparation
 
 
 # Load models
-model_path = 'models/V1.1'
+model_path = 'models/V1.2'
+version = 'v.1.2'
 all_around_model = pickle.load(
-    open(model_path + '/argriculture-produce-prediction-v.1.1.sav', 'rb'))
+    open(model_path + '/argriculture-produce-prediction-' + version + '.sav', 'rb'))
 durian_model = pickle.load(
-    open(model_path + '/durian-prediction-v.1.1.sav', 'rb'))
+    open(model_path + '/durian-prediction-' + version + '.sav', 'rb'))
 longan_model = pickle.load(
-    open(model_path + '/longan-prediction-v.1.1.sav', 'rb'))
+    open(model_path + '/longan-prediction-' + version + '.sav', 'rb'))
 lychees_model = pickle.load(
-    open(model_path + '/lychees-prediction-v.1.1.sav', 'rb'))
+    open(model_path + '/lychees-prediction-' + version + '.sav', 'rb'))
 mangosteen_model = pickle.load(
-    open(model_path + '/mangosteen-prediction-v.1.1.sav', 'rb'))
+    open(model_path + '/mangosteen-prediction-' + version + '.sav', 'rb'))
 rambutan_model = pickle.load(
-    open(model_path + '/rambutan-prediction-v.1.1.sav', 'rb'))
+    open(model_path + '/rambutan-prediction-' + version + '.sav', 'rb'))
 wollongong_model = pickle.load(
-    open(model_path + '/wollongong-prediction-v.1.1.sav', 'rb'))
+    open(model_path + '/wollongong-prediction-' + version + '.sav', 'rb'))
 
 # Load Data Preparation
 data_prep_path = 'dataPrep'
@@ -60,16 +61,18 @@ plant = st.radio(
 prov_value = st.selectbox('จังหวัด', df_province['name_th'])
 month_no = st.selectbox('เดือน', options=list(month.keys()), format_func=format_func, index=current_date.month-1)
 year_no = st.selectbox('ปี', year, index=5)
-min_max_rain = st.slider(
-    'ปริมาณนำ้ฝนต่ำสุดและสูงสุด',
-    0.0, 1500.0, (100.0, 400.0))
+# min_max_rain = st.slider(
+#     'ปริมาณนำ้ฝนต่ำสุดและสูงสุด',
+#     0.0, 1500.0, (100.0, 400.0))
 avg_rain = st.slider(
     'ปริมาณนำ้ฝนโดยเฉลี่ย',
     0.0, 1500.0, 300.0)
 
 #set data
-df = pd.DataFrame(data=np.array([plant, prov_value, min_max_rain[0], min_max_rain[1], avg_rain, year_no, month_no]).reshape(1,-1), 
-                columns=['plant', 'province_name', 'min_rain', 'max_rain','avg_rain', 'year_no', 'month_no'])
+# df = pd.DataFrame(data=np.array([plant, prov_value, min_max_rain[0], min_max_rain[1], avg_rain, year_no, month_no]).reshape(1,-1), 
+#                 columns=['plant', 'province_name', 'min_rain', 'max_rain','avg_rain', 'year_no', 'month_no'])
+df = pd.DataFrame(data=np.array([plant, prov_value, avg_rain, year_no, month_no]).reshape(1,-1), 
+                columns=['plant', 'province_name' ,'avg_rain', 'year_no', 'month_no'])
 df = dataPrep.castType(df)
 
 def selectFruitModel(fruit):
