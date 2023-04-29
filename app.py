@@ -11,7 +11,6 @@ from sklearn.preprocessing import OneHotEncoder,RobustScaler, LabelEncoder
 from dataPrep.datapreparation import DataPreparation
 # from dataPrep import DataPreparation
 
-
 # Load models
 model_path = 'models/V1.2'
 version = 'v.1.2'
@@ -43,7 +42,8 @@ st.set_page_config(
     layout="wide"
 )
 
-st.title("ระบบทำนายผลผลิตทางการเกษตรจากปริมาณน้ำฝน")
+# st.title("ระบบทำนายผลผลิตทางการเกษตรจากปริมาณน้ำฝน")
+st.markdown('## ระบบทำนายผลผลิตทางการเกษตรจากปริมาณน้ำฝน')
 
 current_date = datetime.date.today()
 month = {1: 'มกราคม', 2: 'กุมภาพันธ์', 3: 'มีนาคม', 4: 'เมษายน', 5: 'พฤษภาคม', 6: 'มิถุนายน',
@@ -55,17 +55,17 @@ def format_func(option):
     return month[option]
 
 plant = st.radio(
-    "ประเภทผลผลิต",
+    "#### ประเภทผลผลิต",
     ('เงาะ', 'ลำไย', 'มังคุด', 'ลองกอง', 'ทุเรียน', 'ลิ้นจี่'), horizontal=True)
 
-prov_value = st.selectbox('จังหวัด', df_province['name_th'])
-month_no = st.selectbox('เดือน', options=list(month.keys()), format_func=format_func, index=current_date.month-1)
-year_no = st.selectbox('ปี', year, index=5)
+prov_value = st.selectbox('#### จังหวัด', df_province['name_th'])
+month_no = st.selectbox('#### เดือน', options=list(month.keys()), format_func=format_func, index=current_date.month-1)
+year_no = st.selectbox('#### ปี', year, index=5)
 # min_max_rain = st.slider(
 #     'ปริมาณนำ้ฝนต่ำสุดและสูงสุด',
 #     0.0, 1500.0, (100.0, 400.0))
 avg_rain = st.slider(
-    'ปริมาณนำ้ฝนโดยเฉลี่ย',
+    '#### ปริมาณนำ้ฝนโดยเฉลี่ย',
     0.0, 1500.0, 300.0)
 
 #set data
@@ -96,7 +96,8 @@ df_fruit = df.drop(['plant'], axis=1)
 f_pred_val = selectFruitModel(plant).predict(df_fruit)
 # f_pred_val = durian_model.predict(df_fruit)
 #display prediction value
-st.markdown("#### ผลผลิตการทำนายจากแบบจำลองรวมทุกประเภทผลผลิต  : "+  str(f'{aam_pred_val[0]:.2f}') )
+#st.markdown("#### ผลผลิตการทำนายจากแบบจำลองรวมทุกประเภทผลผลิต  : "+  str(f'{aam_pred_val[0]:.2f}') )
 st.markdown("#### ผลผลิตการทำนายจากแบบจำลองเฉพาะประเภท" + plant + " : "+  str(f'{f_pred_val[0]:.2f}'))
+
 
 #https://i3lackfisl-l-argriculturalproduceprediction-app-s11bs3.streamlit.app/
